@@ -36,8 +36,6 @@
                 <el-sub-menu index="1">
                     <template #title>開始練習</template>
                     <el-menu-item index="/practicePageA"><i class="el-icon-star-on"></i>練習A</el-menu-item>
-                    <el-menu-item index="1-2"><i class="el-icon-star-on"></i>練習B</el-menu-item>
-                    <el-menu-item index="1-3"><i class="el-icon-star-on"></i>練習C</el-menu-item>
                 </el-sub-menu>
                 
                 <el-sub-menu index="2">
@@ -51,6 +49,7 @@
                     <el-sub-menu index="3-1">
                         <template #title>Element</template>
                         <el-menu-item index="/elementCalendar">日曆</el-menu-item>
+                        <el-menu-item index="/elementCarousel">走馬燈</el-menu-item>
 
                     </el-sub-menu>
                     <el-sub-menu index="3-2">
@@ -81,8 +80,7 @@
     import { onMounted, ref } from "vue";
     import { useRouter } from "vue-router";
     import { getAuth, onAuthStateChanged, signOut } from "firebase/auth"
-    import { ref as ref_database, set } from "firebase/database"
-    import { realtimeDb } from "../configs/firebase"
+    import { switchOnlineStatus } from "../configs/firebase"
 
     let isLoggedIn = ref(false);
     const router = useRouter()
@@ -98,20 +96,9 @@
 
     const handSignOut = () => {
         switchOnlineStatus();
-        console.log("switchOnlineStatus")
         signOut(auth).then(() => {
             router.push("/");
         })
-    }
-
-    const switchOnlineStatus = () => {
-        const userId = getAuth().currentUser.uid;
-        const userName = getAuth().currentUser.displayName;
-        set(ref_database(realtimeDb, 'users/' + userId), {
-            userUid: userId,
-            userName: userName,
-            online: false
-        });
     }
 
     onMounted(() => {

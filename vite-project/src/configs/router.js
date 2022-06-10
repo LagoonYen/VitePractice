@@ -23,6 +23,12 @@ export const constantRoutes = [
         component: () => import('@/views/elementCalendar.vue'),
         hidden: true,
     },
+    {
+        path: '/elementCarousel',
+        component: () => import('@/views/elementCarousel.vue'),
+        hidden: true,
+    },
+    
 
     {
         path: '/vuetifyCalendar',

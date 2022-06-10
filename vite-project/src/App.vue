@@ -2,14 +2,8 @@
   <div>
     <nav>
       <div>
-        
         <button @click="handSignOut" v-if="isLoggedIn">退出</button>
       </div>
-      <!-- <div>
-        <router-link to="/realTimeChat">即時通訊</router-link>
-        |
-        <router-link to="/realTimeChatEach">即時通訊1 on 1</router-link>
-      </div> -->
     </nav>
     <nav>
       <mainPageMenuVue></mainPageMenuVue>
@@ -30,39 +24,6 @@
 
   const isLoggedIn = ref(false);
   const router = useRouter()
-
-  let auth;
-
-  // const handSignOut = () => {
-  //   switchOnlineStatus();
-  //   console.log("switchOnlineStatus")
-  //   signOut(auth).then(() => {
-  //     router.push("/");
-  //   })
-  // }
-
-  // const switchOnlineStatus = () => {
-  //     const userId = getAuth().currentUser.uid;
-  //     const userName = getAuth().currentUser.displayName;
-  //     set(ref_database(realtimeDb, 'users/' + userId), {
-  //       userUid: userId,
-  //       userName: userName,
-  //       online: false
-  //     });
-  // }
-
-  // onMounted(() => {
-  //   auth = getAuth();
-  //   onAuthStateChanged(auth, (user) => {
-  //     if(user){
-  //       isLoggedIn.value = true;
-  //     }
-  //     else{
-  //       isLoggedIn.value = false;
-  //     }
-  //   })
-  // })
-
 </script>
 
 <style>

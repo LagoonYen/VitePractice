@@ -289,9 +289,7 @@
                 </div>
                 <chatBroad v-if="data.roomExist === true" :prop_authUserUid="data.authUserUid" :prop_authOtherUid="data.authOtherUid">
                 </chatBroad>
-                <div v-else style="min-height:720px">
-                    請選擇聊天室
-                </div>
+                <el-empty v-else description="請選擇聊天室" style="min-height:720px"/>
             </div>
         </div>
     </div>
@@ -299,11 +297,11 @@
 
 <script setup>
     import { reactive, onMounted, onBeforeMount, ref } from 'vue'
-    import { ref as ref_database, set, onValue } from "firebase/database";
     import { getAuth, signOut,   } from "firebase/auth";
-    import { auth, realtimeDb } from '../configs/firebase';
+    import { auth, getUserList, switchOnlineStatus } from '../configs/firebase';
     import { useRouter } from "vue-router";
-    import chatBroad from '../components/chat-Broad.vue';
+    //已使用直接引用component
+    // import chatBroad from '../components/chat-Broad.vue';
     // import userAvatar from '../components/userAvatar.vue'
 
     let circleUrl = ref("https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png")
@@ -315,19 +313,14 @@
         roomExist:false,
         userName: "",
         messages: [],
-        allUsers: []
+        allUsers: [],
     })
 
     let user = auth.currentUser;
 
-    const SwitchOtherUserUid = (OtherUid) => {
-        console.log("roomExist", data.roomExist)
-
+    const SwitchOtherUserUid = ( OtherUid ) => {
         data.authOtherUid = OtherUid;
-        console.log("點選ID", data.authOtherUid)
-        
         if(data.authOtherUid != ""){
-            console.log("轉換room")
             data.roomExist= true;
         }
     }
@@ -340,30 +333,11 @@
     })
 
     onMounted(() => {
-        //user Realtime Database
-        getUsersList();
+        getUserList().then(response => {
+            data.allUsers = response;
+        });
+        console.log("allUsers", data.allUsers);
     })
-
-    const getUsersList = () => {
-        const userRef = ref_database(realtimeDb, 'users');
-
-        onValue(userRef, (snapshot) => {
-            console.log("userRef", snapshot.val())
-
-            let users = [];
-
-            snapshot.forEach((childSnapshot) => {
-                console.log("childSnapshot.val(), ", childSnapshot.val().userName)
-                users.push({
-                    userName: childSnapshot.val().userName,
-                    userUid: childSnapshot.val().userUid,
-                    online: childSnapshot.val().online
-                })
-            })
-
-            data.allUsers = users;
-        })
-    }
 
     const router = useRouter()
 
@@ -373,15 +347,5 @@
         signOut(auth).then(() => {
             router.push("/");
         })
-    }
-
-    const switchOnlineStatus = () => {
-        const userId = getAuth().currentUser.uid;
-        const userName = getAuth().currentUser.displayName;
-        set(ref_database(realtimeDb, 'users/' + userId), {
-            userUid: userId,
-            userName: userName,
-            online: false
-        });
     }
 </script>

@@ -51,6 +51,9 @@
                             </div>
                         </div>
                     </el-form-item>
+                    <el-form-item label="背景顏色">
+                        <el-color-picker v-model="form.color" size="large" />
+                    </el-form-item>
                 </el-form>
 
             </div>
@@ -93,7 +96,7 @@
         plugins: [ dayGridPlugin, timeGridPlugin, interactionPlugin ],
         
         //時間區段
-        timeZone: 'UTC',
+        // timeZone: 'UTC',
         
         // 本身高度也可以用% 去抓父元素大小
         height: 800,
@@ -130,14 +133,16 @@
                 dayMaxEventRows: 2
             }
         },
+
+        // 編輯與否
         editable: true,
         events: [
-            { title: '寶可夢日A', mainSub:"Pokemon", start: '2022-06-07 15:00:00', end: '2022-06-09 01:00:00' },
-            { title: '寶可夢日B', mainSub:"Pokemon", start: '2022-06-08 15:00:00', end: '2022-06-09 01:00:00', color: "blue" },
-            { title: '寶可夢日C', mainSub:"Pokemon", start: '2022-06-08 13:00:00', end: '2022-06-08 16:00:00', color: "orange" },
-            { title: '寶可夢日D', mainSub:"Pokemon", start: '2022-06-08', end: '2022-06-11'},
-            { title: '寶可夢道館日', mainSub:"Pokemon", start: '2022-06-30 12:00', end:'2022-06-30 14:00' },
-            { title: '寶可夢日E', mainSub:"Pokemon", date: '2022-06-30' },
+            { id:'1' , title: '寶可夢日A', mainSub:"Pokemon", start: '2022-06-07 15:00:00', end: '2022-06-09 01:00:00' },
+            { id:'2' , title: '寶可夢日B', mainSub:"Pokemon", start: '2022-06-08 15:00:00', end: '2022-06-09 01:00:00', color: "blue" },
+            { id:'3' , title: '寶可夢日C', mainSub:"Pokemon", start: '2022-06-08 13:00:00', end: '2022-06-08 16:00:00', color: "orange" },
+            { id:'4' , title: '寶可夢日D', mainSub:"Pokemon", start: '2022-06-08', end: '2022-06-11'},
+            { id:'5' , title: '寶可夢道館日', mainSub:"Pokemon", start: '2022-06-30 12:00', end:'2022-06-30 14:00' },
+            { id:'6' , title: '寶可夢日E', mainSub:"Pokemon", date: '2022-06-30' },
         ],
         businessHours:  [
             {
@@ -154,16 +159,19 @@
         eventColor:"#378006",
         eventClick: handleEventClick,
         selectable: true,
+
+        //現在時間
         nowIndicator: true,
         
     })
 
     //右側操作面板
     // const value1 = ref('')
-    const form = reactive({
+    let form = reactive({
         title: '',
         date: '',
         mainSub: '',
+        color:'#FF9500',
     })
 
     const defaultTime2 = ref([
@@ -171,6 +179,7 @@
         new Date(2000, 6, 8, 18, 0, 0),
     ])
 
+    //分類
     const mainSubOptions = ref([
         {
             value: 'Pokemon',
@@ -192,7 +201,7 @@
 
     const onSubmit = () => {
         console.log('submit!', form)
-        if(form.title == '' || form.date == '' || form.mainSub == ''){
+        if(form.title == '' || form.date == '' || form.mainSub == '' || form.color == ''){
             alert("資料不齊")
             return;
         }
@@ -200,14 +209,17 @@
             "title":form.title,
             "start":dayjs(form.date[0]).format('YYYY-MM-DD HH:mm:ss'),
             "end":dayjs(form.date[1]).format('YYYY-MM-DD HH:mm:ss'),
-            "mainSub":form.mainSub
+            "mainSub":form.mainSub,
+            "color":form.color,
+
         })
         onClean();
     }
 
     const onClean = () => {
-        form.title =''
+        form.title = ''
         form.date = ''
         form.mainSub = ''
+        form.color = '#FF9500'
     }
 </script>

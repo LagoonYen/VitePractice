@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore }  from 'firebase/firestore'
-import { getDatabase } from 'firebase/database'
+import { getDatabase, ref, onValue, set } from 'firebase/database'
 import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
@@ -22,3 +22,34 @@ export const fireStoreDb = getFirestore();
 export const realtimeDb = getDatabase();
 // 使用者資料
 export const auth = getAuth();
+
+const userRef = ref(realtimeDb, 'users');
+
+//取得成員列表
+export const getUserList = () => {
+    return new Promise((resolve, reject) => {
+        onValue(userRef, (snapshot) => {
+            let users = [];
+            snapshot.forEach((childSnapshot) => {
+                console.log("childSnapshot.val(), ", childSnapshot.val().userName)
+                users.push({
+                    userName: childSnapshot.val().userName,
+                    userUid: childSnapshot.val().userUid,
+                    online: childSnapshot.val().online
+                })
+            })
+            resolve(users);
+        });
+    });
+};
+
+//切換上下線狀態
+export const switchOnlineStatus = () => {
+    const userId = getAuth().currentUser.uid;
+    const userName = getAuth().currentUser.displayName;
+    set(ref(realtimeDb, 'users/' + userId), {
+        userUid: userId,
+        userName: userName,
+        online: false
+    });
+}
