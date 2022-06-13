@@ -28,18 +28,31 @@ export const constantRoutes = [
         component: () => import('@/views/elementCarousel.vue'),
         hidden: true,
     },
-    
-
     {
         path: '/vuetifyCalendar',
         component: () => import('@/views/vuetifyCalendar.vue'),
         hidden: true,
     },
-    
     {
         path: '/fullCalendar',
         component: () => import('@/views/fullCalendar.vue'),
         hidden: true,
+    },
+    {
+        path: '/chartjs',
+        component: () => import('@/views/chartjs.vue'),
+        hidden: true,
+        meta:{
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/timeLine',
+        component: () => import('@/views/timeLine.vue'),
+        hidden: true,
+        meta:{
+            requiresAuth: true
+        }
     },
     
     {

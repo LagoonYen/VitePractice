@@ -1,4 +1,3 @@
-
 <style scoped>
     .el-carousel__item h3 {
         color: #475669;
@@ -48,38 +47,15 @@
             </el-carousel-item>
         </el-carousel>
 
-        <div style="display: flex;">
-            <div style="width:33%;">
-                <el-carousel :interval="2000" type="card" height="200px">
-                    <el-carousel-item v-for="event in carouselImgList" :key="event">
-                        <div class="item">
-                            <div class="item__content">{{ event.name }}</div>
-                            <img class="item__image" :src="event.img" alt="" />
-                        </div>
-                    </el-carousel-item>
-                </el-carousel>
-            </div>
-            <div style="width:33%;">
-                <el-carousel :interval="2000" type="card" height="200px">
-                    <el-carousel-item v-for="event in carouselImgList" :key="event">
-                        <div class="item">
-                            <div class="item__content">{{ event.name }}</div>
-                            <img class="item__image" :src="event.img" alt="" />
-                        </div>
-                    </el-carousel-item>
-                </el-carousel>
-            </div>
-            <div style="width:33%;">
-                <el-carousel :interval="2000" type="card" height="200px">
-                    <el-carousel-item v-for="event in carouselImgList" :key="event">
-                        <div class="item">
-                            <div class="item__content">{{ event.name }}</div>
-                            <img class="item__image" :src="event.img" alt="" />
-                        </div>
-                    </el-carousel-item>
-                </el-carousel>
-            </div>
-        </div>
+
+        <el-carousel :interval="2000" type="card" height="300px">
+            <el-carousel-item v-for="event in carouselImgList" :key="event">
+                <div class="item">
+                    <div class="item__content">{{ event.name }}</div>
+                    <img class="item__image" :src="event.img" alt="" @click="goToWebsite(event.website)"/>
+                </div>
+            </el-carousel-item>
+        </el-carousel>
     </div>
 </template>
 
@@ -99,26 +75,36 @@
         {
             name:"A",
             img:imageA,
+            website:'https://tw.yahoo.com/'
         },
         {
             name:"B",
-            img:imageB
+            img:imageB,
+            website:'https://tw.yahoo.com/'
         },
         {
             name:"C",
-            img:imageC
+            img:imageC,
+            website:'https://tw.yahoo.com/'
         },
         {
             name:"D",
-            img:imageD
+            img:imageD,
+            website:'https://tw.yahoo.com/'
         },
         {
             name:"E",
-            img:imageE
+            img:imageE,
+            website:'https://tw.yahoo.com/'
         },
         {
             name:"F",
-            img:imageF
+            img:imageF,
+            website:'https://tw.yahoo.com/'
         },
     ])
+
+    const goToWebsite = (website) => {
+        window.open(website);
+    }
 </script>

@@ -62,6 +62,12 @@
                         <el-menu-item index="/fullCalendar">日曆</el-menu-item>
 
                     </el-sub-menu>
+                    <el-sub-menu index="3-4">
+                        <template #title>其他</template>
+                        <el-menu-item index="/chartjs">圖表</el-menu-item>
+                        <el-menu-item index="/timeLine">圖表</el-menu-item>
+
+                    </el-sub-menu>
                 </el-sub-menu>
 
                 <div class="flex-grow" />

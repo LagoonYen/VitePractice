@@ -297,7 +297,7 @@
 
 <script setup>
     import { reactive, onMounted, onBeforeMount, ref } from 'vue'
-    import { getAuth, signOut,   } from "firebase/auth";
+    import { getAuth, signOut } from "firebase/auth";
     import { auth, getUserList, switchOnlineStatus } from '../configs/firebase';
     import { useRouter } from "vue-router";
     //已使用直接引用component

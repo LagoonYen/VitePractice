@@ -5,6 +5,8 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 const { resolve } = require('path');
 
+const path = require('path');
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,7 +24,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
 })
