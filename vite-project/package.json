@@ -13,7 +13,6 @@
     "@fullcalendar/interaction": "^5.11.0",
     "@fullcalendar/timegrid": "^5.11.0",
     "@fullcalendar/vue3": "^5.11.1",
-    "@growthbunker/vuetimeline": "^0.1.17",
     "@vueuse/core": "^8.6.0",
     "chart.js": "^3.8.0",
     "dayjs": "^1.11.3",

@@ -29,6 +29,11 @@ export const constantRoutes = [
         hidden: true,
     },
     {
+        path: '/elementTimeline',
+        component: () => import('@/views/elementTimeline.vue'),
+        hidden: true,
+    },
+    {
         path: '/vuetifyCalendar',
         component: () => import('@/views/vuetifyCalendar.vue'),
         hidden: true,

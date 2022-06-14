@@ -50,6 +50,7 @@
                         <template #title>Element</template>
                         <el-menu-item index="/elementCalendar">日曆</el-menu-item>
                         <el-menu-item index="/elementCarousel">走馬燈</el-menu-item>
+                        <el-menu-item index="/elementTimeline">時間線</el-menu-item>
 
                     </el-sub-menu>
                     <el-sub-menu index="3-2">
@@ -65,7 +66,7 @@
                     <el-sub-menu index="3-4">
                         <template #title>其他</template>
                         <el-menu-item index="/chartjs">圖表</el-menu-item>
-                        <el-menu-item index="/timeLine">圖表</el-menu-item>
+                        <el-menu-item index="/timeLine">時間線(空)</el-menu-item>
 
                     </el-sub-menu>
                 </el-sub-menu>
